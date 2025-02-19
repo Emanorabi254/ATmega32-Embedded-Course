@@ -1,0 +1,365 @@
+
+Seven_Segment.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001e0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000014  00800060  000001e0  00000254  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000268  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000298  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000088  00000000  00000000  000002d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000a6b  00000000  00000000  0000035c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000753  00000000  00000000  00000dc7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000575  00000000  00000000  0000151a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000cc  00000000  00000000  00001a90  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000479  00000000  00000000  00001b5c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000003b0  00000000  00000000  00001fd5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000070  00000000  00000000  00002385  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 ee       	ldi	r30, 0xE0	; 224
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 37       	cpi	r26, 0x74	; 116
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 67 00 	call	0xce	; 0xce <main>
+  7a:	0c 94 ee 00 	jmp	0x1dc	; 0x1dc <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <DIO_SetPortDirection>:
+
+/* Function definitions that deals with pins */
+
+void DIO_SetPortDirection(u8 Portname,u8 PortDirection)
+{
+	switch(Portname)
+  82:	82 30       	cpi	r24, 0x02	; 2
+  84:	59 f0       	breq	.+22     	; 0x9c <DIO_SetPortDirection+0x1a>
+  86:	18 f4       	brcc	.+6      	; 0x8e <DIO_SetPortDirection+0xc>
+  88:	81 30       	cpi	r24, 0x01	; 1
+  8a:	31 f0       	breq	.+12     	; 0x98 <DIO_SetPortDirection+0x16>
+  8c:	08 95       	ret
+  8e:	83 30       	cpi	r24, 0x03	; 3
+  90:	39 f0       	breq	.+14     	; 0xa0 <DIO_SetPortDirection+0x1e>
+  92:	84 30       	cpi	r24, 0x04	; 4
+  94:	39 f0       	breq	.+14     	; 0xa4 <DIO_SetPortDirection+0x22>
+  96:	08 95       	ret
+	{
+		case PORT_A: DDRA=PortDirection;
+  98:	6a bb       	out	0x1a, r22	; 26
+		break;
+  9a:	08 95       	ret
+		case PORT_B: DDRB=PortDirection;
+  9c:	67 bb       	out	0x17, r22	; 23
+		break;
+  9e:	08 95       	ret
+		case PORT_C: DDRC=PortDirection;
+  a0:	64 bb       	out	0x14, r22	; 20
+		break;
+  a2:	08 95       	ret
+		case PORT_D: DDRD=PortDirection;
+  a4:	61 bb       	out	0x11, r22	; 17
+  a6:	08 95       	ret
+
+000000a8 <DIO_SetPortValue>:
+		break;
+	}
+}
+void DIO_SetPortValue(u8 Portname,u8 PortValue)
+{
+	switch(Portname)
+  a8:	82 30       	cpi	r24, 0x02	; 2
+  aa:	59 f0       	breq	.+22     	; 0xc2 <DIO_SetPortValue+0x1a>
+  ac:	18 f4       	brcc	.+6      	; 0xb4 <DIO_SetPortValue+0xc>
+  ae:	81 30       	cpi	r24, 0x01	; 1
+  b0:	31 f0       	breq	.+12     	; 0xbe <DIO_SetPortValue+0x16>
+  b2:	08 95       	ret
+  b4:	83 30       	cpi	r24, 0x03	; 3
+  b6:	39 f0       	breq	.+14     	; 0xc6 <DIO_SetPortValue+0x1e>
+  b8:	84 30       	cpi	r24, 0x04	; 4
+  ba:	39 f0       	breq	.+14     	; 0xca <DIO_SetPortValue+0x22>
+  bc:	08 95       	ret
+	{
+		case PORT_A: PORTA=PortValue;
+  be:	6b bb       	out	0x1b, r22	; 27
+		break;
+  c0:	08 95       	ret
+		case PORT_B: PORTB=PortValue;
+  c2:	68 bb       	out	0x18, r22	; 24
+		break;
+  c4:	08 95       	ret
+		case PORT_C: PORTC=PortValue;
+  c6:	65 bb       	out	0x15, r22	; 21
+		break;
+  c8:	08 95       	ret
+		case PORT_D: PORTD=PortValue;
+  ca:	62 bb       	out	0x12, r22	; 18
+  cc:	08 95       	ret
+
+000000ce <main>:
+#include "SEVENSEGMENT_Interface.h"
+
+int main(void)
+{
+    /* Replace with your application code */
+	SEVENSEGMENT_Init(PORTA);
+  ce:	8b b3       	in	r24, 0x1b	; 27
+  d0:	0e 94 78 00 	call	0xf0	; 0xf0 <SEVENSEGMENT_Init>
+	SEVENSEGMENT_Init(PORTC);
+  d4:	85 b3       	in	r24, 0x15	; 21
+  d6:	0e 94 78 00 	call	0xf0	; 0xf0 <SEVENSEGMENT_Init>
+    while (1) 
+    {
+		SEVENSEGMENT_SetCommon(PORTA,COMMON_ANODE,COUNT_INCREASING);
+  da:	41 e0       	ldi	r20, 0x01	; 1
+  dc:	61 e0       	ldi	r22, 0x01	; 1
+  de:	8b b3       	in	r24, 0x1b	; 27
+  e0:	0e 94 7c 00 	call	0xf8	; 0xf8 <SEVENSEGMENT_SetCommon>
+		SEVENSEGMENT_SetCommon(PORTC,COMMON_CATHODE,COUNR_DECREASING);
+  e4:	40 e0       	ldi	r20, 0x00	; 0
+  e6:	60 e0       	ldi	r22, 0x00	; 0
+  e8:	85 b3       	in	r24, 0x15	; 21
+  ea:	0e 94 7c 00 	call	0xf8	; 0xf8 <SEVENSEGMENT_SetCommon>
+  ee:	f5 cf       	rjmp	.-22     	; 0xda <main+0xc>
+
+000000f0 <SEVENSEGMENT_Init>:
+#include "STD_TYPES.h"
+
+
+void SEVENSEGMENT_Init(u8 Portname)
+{
+	DIO_SetPortDirection(Portname,PORT_OUTPUT);
+  f0:	61 e0       	ldi	r22, 0x01	; 1
+  f2:	0e 94 41 00 	call	0x82	; 0x82 <DIO_SetPortDirection>
+  f6:	08 95       	ret
+
+000000f8 <SEVENSEGMENT_SetCommon>:
+}
+
+void SEVENSEGMENT_SetCommon(u8 Portname,u8 CommonChosen,u8 CountingChosen)
+{
+  f8:	cf 93       	push	r28
+  fa:	df 93       	push	r29
+  fc:	cd b7       	in	r28, 0x3d	; 61
+  fe:	de b7       	in	r29, 0x3e	; 62
+ 100:	64 97       	sbiw	r28, 0x14	; 20
+ 102:	0f b6       	in	r0, 0x3f	; 63
+ 104:	f8 94       	cli
+ 106:	de bf       	out	0x3e, r29	; 62
+ 108:	0f be       	out	0x3f, r0	; 63
+ 10a:	cd bf       	out	0x3d, r28	; 61
+ 10c:	f8 2e       	mov	r15, r24
+ 10e:	06 2f       	mov	r16, r22
+ 110:	e4 2e       	mov	r14, r20
+	u8 COMMON_ANODE_Value[]={0XC0,0XF9,0XA4,0XB0,0X99,0X92,0X82,0XF8,0X80,0X90};
+ 112:	8a e0       	ldi	r24, 0x0A	; 10
+ 114:	e0 e6       	ldi	r30, 0x60	; 96
+ 116:	f0 e0       	ldi	r31, 0x00	; 0
+ 118:	de 01       	movw	r26, r28
+ 11a:	11 96       	adiw	r26, 0x01	; 1
+ 11c:	01 90       	ld	r0, Z+
+ 11e:	0d 92       	st	X+, r0
+ 120:	8a 95       	dec	r24
+ 122:	e1 f7       	brne	.-8      	; 0x11c <SEVENSEGMENT_SetCommon+0x24>
+	u8 COMMON_CATHODE_Value[]={0X3F,0X06,0X5B,0X4F,0X66,0X6D,0X7D,0X07,0X7F,0X6F};
+ 124:	8a e0       	ldi	r24, 0x0A	; 10
+ 126:	ea e6       	ldi	r30, 0x6A	; 106
+ 128:	f0 e0       	ldi	r31, 0x00	; 0
+ 12a:	de 01       	movw	r26, r28
+ 12c:	1b 96       	adiw	r26, 0x0b	; 11
+ 12e:	01 90       	ld	r0, Z+
+ 130:	0d 92       	st	X+, r0
+ 132:	8a 95       	dec	r24
+ 134:	e1 f7       	brne	.-8      	; 0x12e <SEVENSEGMENT_SetCommon+0x36>
+		
+	while(1)
+	{	
+		if (CountingChosen==COUNT_INCREASING)
+ 136:	21 e0       	ldi	r18, 0x01	; 1
+ 138:	e2 12       	cpse	r14, r18
+ 13a:	29 c0       	rjmp	.+82     	; 0x18e <SEVENSEGMENT_SetCommon+0x96>
+ 13c:	24 c0       	rjmp	.+72     	; 0x186 <SEVENSEGMENT_SetCommon+0x8e>
+		{		
+			for(u8 LoopIndex=0;LoopIndex<10;LoopIndex++)
+			{
+				if (CommonChosen == COMMON_ANODE)
+ 13e:	01 30       	cpi	r16, 0x01	; 1
+ 140:	59 f4       	brne	.+22     	; 0x158 <SEVENSEGMENT_SetCommon+0x60>
+				{
+					DIO_SetPortValue(Portname, COMMON_ANODE_Value[LoopIndex]);
+ 142:	e1 e0       	ldi	r30, 0x01	; 1
+ 144:	f0 e0       	ldi	r31, 0x00	; 0
+ 146:	ec 0f       	add	r30, r28
+ 148:	fd 1f       	adc	r31, r29
+ 14a:	e1 0f       	add	r30, r17
+ 14c:	f1 1d       	adc	r31, r1
+ 14e:	60 81       	ld	r22, Z
+ 150:	8f 2d       	mov	r24, r15
+ 152:	0e 94 54 00 	call	0xa8	; 0xa8 <DIO_SetPortValue>
+ 156:	0c c0       	rjmp	.+24     	; 0x170 <SEVENSEGMENT_SetCommon+0x78>
+				}
+				else if (CommonChosen == COMMON_CATHODE)
+ 158:	01 11       	cpse	r16, r1
+ 15a:	0a c0       	rjmp	.+20     	; 0x170 <SEVENSEGMENT_SetCommon+0x78>
+				{
+					DIO_SetPortValue(Portname, COMMON_CATHODE_Value[LoopIndex]);
+ 15c:	eb e0       	ldi	r30, 0x0B	; 11
+ 15e:	f0 e0       	ldi	r31, 0x00	; 0
+ 160:	ec 0f       	add	r30, r28
+ 162:	fd 1f       	adc	r31, r29
+ 164:	e1 0f       	add	r30, r17
+ 166:	f1 1d       	adc	r31, r1
+ 168:	60 81       	ld	r22, Z
+ 16a:	8f 2d       	mov	r24, r15
+ 16c:	0e 94 54 00 	call	0xa8	; 0xa8 <DIO_SetPortValue>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 170:	8f e9       	ldi	r24, 0x9F	; 159
+ 172:	96 e8       	ldi	r25, 0x86	; 134
+ 174:	21 e0       	ldi	r18, 0x01	; 1
+ 176:	81 50       	subi	r24, 0x01	; 1
+ 178:	90 40       	sbci	r25, 0x00	; 0
+ 17a:	20 40       	sbci	r18, 0x00	; 0
+ 17c:	e1 f7       	brne	.-8      	; 0x176 <SEVENSEGMENT_SetCommon+0x7e>
+ 17e:	00 c0       	rjmp	.+0      	; 0x180 <SEVENSEGMENT_SetCommon+0x88>
+ 180:	00 00       	nop
+		
+	while(1)
+	{	
+		if (CountingChosen==COUNT_INCREASING)
+		{		
+			for(u8 LoopIndex=0;LoopIndex<10;LoopIndex++)
+ 182:	1f 5f       	subi	r17, 0xFF	; 255
+ 184:	01 c0       	rjmp	.+2      	; 0x188 <SEVENSEGMENT_SetCommon+0x90>
+ 186:	10 e0       	ldi	r17, 0x00	; 0
+ 188:	1a 30       	cpi	r17, 0x0A	; 10
+ 18a:	c8 f2       	brcs	.-78     	; 0x13e <SEVENSEGMENT_SetCommon+0x46>
+ 18c:	d4 cf       	rjmp	.-88     	; 0x136 <SEVENSEGMENT_SetCommon+0x3e>
+				}
+
+				_delay_ms(500);
+			}
+		}
+		else if(CountingChosen==COUNR_DECREASING)
+ 18e:	e1 10       	cpse	r14, r1
+ 190:	d2 cf       	rjmp	.-92     	; 0x136 <SEVENSEGMENT_SetCommon+0x3e>
+ 192:	19 e0       	ldi	r17, 0x09	; 9
+		{
+			for(u8 LoopIndex=9;LoopIndex>=0;LoopIndex--)
+			{
+				if (CommonChosen == COMMON_ANODE)
+ 194:	01 30       	cpi	r16, 0x01	; 1
+ 196:	59 f4       	brne	.+22     	; 0x1ae <SEVENSEGMENT_SetCommon+0xb6>
+				{
+					DIO_SetPortValue(Portname, COMMON_ANODE_Value[LoopIndex]);
+ 198:	e1 e0       	ldi	r30, 0x01	; 1
+ 19a:	f0 e0       	ldi	r31, 0x00	; 0
+ 19c:	ec 0f       	add	r30, r28
+ 19e:	fd 1f       	adc	r31, r29
+ 1a0:	e1 0f       	add	r30, r17
+ 1a2:	f1 1d       	adc	r31, r1
+ 1a4:	60 81       	ld	r22, Z
+ 1a6:	8f 2d       	mov	r24, r15
+ 1a8:	0e 94 54 00 	call	0xa8	; 0xa8 <DIO_SetPortValue>
+ 1ac:	0c c0       	rjmp	.+24     	; 0x1c6 <SEVENSEGMENT_SetCommon+0xce>
+				}
+				else if (CommonChosen == COMMON_CATHODE)
+ 1ae:	01 11       	cpse	r16, r1
+ 1b0:	0a c0       	rjmp	.+20     	; 0x1c6 <SEVENSEGMENT_SetCommon+0xce>
+				{
+					DIO_SetPortValue(Portname, COMMON_CATHODE_Value[LoopIndex]);
+ 1b2:	eb e0       	ldi	r30, 0x0B	; 11
+ 1b4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b6:	ec 0f       	add	r30, r28
+ 1b8:	fd 1f       	adc	r31, r29
+ 1ba:	e1 0f       	add	r30, r17
+ 1bc:	f1 1d       	adc	r31, r1
+ 1be:	60 81       	ld	r22, Z
+ 1c0:	8f 2d       	mov	r24, r15
+ 1c2:	0e 94 54 00 	call	0xa8	; 0xa8 <DIO_SetPortValue>
+ 1c6:	8f e9       	ldi	r24, 0x9F	; 159
+ 1c8:	96 e8       	ldi	r25, 0x86	; 134
+ 1ca:	21 e0       	ldi	r18, 0x01	; 1
+ 1cc:	81 50       	subi	r24, 0x01	; 1
+ 1ce:	90 40       	sbci	r25, 0x00	; 0
+ 1d0:	20 40       	sbci	r18, 0x00	; 0
+ 1d2:	e1 f7       	brne	.-8      	; 0x1cc <SEVENSEGMENT_SetCommon+0xd4>
+ 1d4:	00 c0       	rjmp	.+0      	; 0x1d6 <SEVENSEGMENT_SetCommon+0xde>
+ 1d6:	00 00       	nop
+				_delay_ms(500);
+			}
+		}
+		else if(CountingChosen==COUNR_DECREASING)
+		{
+			for(u8 LoopIndex=9;LoopIndex>=0;LoopIndex--)
+ 1d8:	11 50       	subi	r17, 0x01	; 1
+				{
+					DIO_SetPortValue(Portname, COMMON_CATHODE_Value[LoopIndex]);
+				}
+
+				_delay_ms(500);
+			}
+ 1da:	dc cf       	rjmp	.-72     	; 0x194 <SEVENSEGMENT_SetCommon+0x9c>
+
+000001dc <_exit>:
+ 1dc:	f8 94       	cli
+
+000001de <__stop_program>:
+ 1de:	ff cf       	rjmp	.-2      	; 0x1de <__stop_program>
